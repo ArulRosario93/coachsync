@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class COngingSchedulePage extends StatelessWidget {
-  const COngingSchedulePage({super.key});
+
+  final GestureTapCallback? onTap;
+  const COngingSchedulePage({super.key, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -49,31 +51,34 @@ class COngingSchedulePage extends StatelessWidget {
               child: Stack(
                 children: [
               
-                  Container(
-                    color: Colors.amber,
-                    height: 150,
-                    margin: EdgeInsets.only(top: 50),
-                    child: Stack(
-                      fit: StackFit.expand,
-                      alignment: Alignment.bottomCenter,
-                      children: [
-                        Image.asset('assets/OnboardingImages/run.png', height: 150, fit: BoxFit.cover,),
-                                  
-                        Container(color: const Color.fromARGB(108, 0, 0, 0), alignment: Alignment.center,),
-                                  
-                        Positioned(
-                          bottom: 10,
-                          left: 10,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Text('Day: 05/100', style: TextStyle(color: Colors.white),),
-                              Text('Push Day', style: TextStyle(color: Colors.white),)
-                            ],
-                          ),
-                        )
-                      ],
+                  GestureDetector(
+                    onTap: onTap,
+                    child: Container(
+                      color: Colors.amber,
+                      height: 150,
+                      margin: EdgeInsets.only(top: 50),
+                      child: Stack(
+                        fit: StackFit.expand,
+                        alignment: Alignment.bottomCenter,
+                        children: [
+                          Image.asset('assets/OnboardingImages/run.png', height: 150, fit: BoxFit.cover,),
+                                    
+                          Container(color: const Color.fromARGB(108, 0, 0, 0), alignment: Alignment.center,),
+                                    
+                          Positioned(
+                            bottom: 10,
+                            left: 10,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Text('Day: 05/100', style: TextStyle(color: Colors.white),),
+                                Text('Push Day', style: TextStyle(color: Colors.white),)
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
 

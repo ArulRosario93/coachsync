@@ -1,13 +1,14 @@
 
 const express = require("express");
 const serverless = require("serverless-http");
-const { db1, db2 } = require('../../connection.js');
+const { db1, db2 } = require('../connection.js');
 
 const app = express();
-app.use(express.json());
+const Router = express.Router();
 
-app.get("/", (req, res) => {
+Router.get("/", (req, res) => {
     res.json({ message: "Hello from Netlify Lambda!" }); 
 });
 
+app.use('/.netlify/functions/createuser', Router);
 module.exports.handler = serverless(app);

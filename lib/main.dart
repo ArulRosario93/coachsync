@@ -1,4 +1,8 @@
-import 'package:coachsync/View/OnboardingPages/onboardingpage.dart';
+import 'package:coachsync/View/ChatPage/chatpage.dart';
+import 'package:coachsync/View/ClientPages/SuggestedTrainerPage/suggestedtrainerpage.dart';
+import 'package:coachsync/View/ClientPages/WorkoutPage/workoutpage.dart';
+import 'package:coachsync/View/ClientPages/clientpage.dart';
+import 'package:coachsync/View/OnboardingPages/onboardingpage.dart';  
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -27,7 +31,7 @@ class CoachSync extends StatelessWidget {
       theme: ThemeData(
         textTheme: GoogleFonts.alataTextTheme(),
       ),
-      home: OnboardingPage(),
+      home: ChatPage(),
     );
   }
 }
