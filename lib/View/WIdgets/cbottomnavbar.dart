@@ -8,6 +8,8 @@ class ClientBottomNavBar extends StatelessWidget {
     return Padding(
       padding: EdgeInsetsGeometry.symmetric(horizontal: MediaQuery.of(context).size.width * .3),
       child: BottomNavigationBar(
+        elevation: 0,
+        type: BottomNavigationBarType.fixed,
         showSelectedLabels: false,
         showUnselectedLabels: false,
         selectedIconTheme: IconThemeData(
@@ -16,7 +18,7 @@ class ClientBottomNavBar extends StatelessWidget {
         unselectedIconTheme: IconThemeData(
           size: 25.0
         ),
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.black,
         items: [
           BottomNavigationBarItem(
             label: 'Home',

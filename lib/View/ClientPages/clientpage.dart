@@ -40,15 +40,15 @@ class ClientPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Color(0xFF181818),
+      resizeToAvoidBottomInset: true,
       bottomNavigationBar: 
       ClientBottomNavBar(),
-      
       appBar: AppBar(
         backgroundColor: Color(0xFF181818),
         title: Hero(tag: 'appname', child: Material(color: Colors.transparent, child: Text('CoachSync', style: TextStyle(fontSize: 20, color: Colors.white),))),
       ),
 
-      body: scroll? SingleChildScrollView(
+      body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
           children: [
@@ -57,14 +57,15 @@ class ClientPage extends StatelessWidget {
             CTomorrowPlan()
           ],
         ),
-      ): Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            COngingSchedulePage(onTap: handleClick,),
-            CTodaysGoal(),
-            CTomorrowPlan(),
-          ],
-        )
+      )
+      // : Column(
+      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //     children: [
+      //       COngingSchedulePage(onTap: handleClick,),
+      //       CTodaysGoal(),
+      //       CTomorrowPlan(),
+      //     ],
+      //   )
     );
   }
 }
