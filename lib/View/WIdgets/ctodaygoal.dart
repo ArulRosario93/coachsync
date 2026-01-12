@@ -11,34 +11,33 @@ class CTodaysGoal extends StatelessWidget {
       {
         'name': 'Calories Brunt',
         'color': Color.fromARGB(255, 255, 0, 0),
-        'value': .56
+        'value': .0
       },
       {
         'name': 'Sleep',
         'color': Color.fromARGB(255, 0, 255, 162),
-        'value': .34
+        'value': .0
       },
       {
         'name': 'Calories Brunt',
         'color': Color.fromARGB(255, 255, 0, 0),
-        'value': .56
+        'value': .0
       },
       {
         'name': 'Sleep',
         'color': Color.fromARGB(255, 0, 255, 162),
-        'value': .34
+        'value': 0
       },
       {
         'name': 'Calories Brunt',
         'color': Color.fromARGB(255, 255, 0, 0),
-        'value': .56
+        'value': .0
       },
     ];
 
 
     return Column(
       children: [
-
 
         Text("Today's Goal", style: TextStyle(fontWeight: FontWeight.w500, color: Colors.white, fontSize: 18),),
     

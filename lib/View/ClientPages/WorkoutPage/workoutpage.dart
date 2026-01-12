@@ -44,6 +44,7 @@ class WorkoutPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color(0xFF1B1B1B),
       appBar: AppBar(
+        leadingWidth: 30,
         foregroundColor: Colors.white,
         backgroundColor: Colors.transparent,
         title: Text('CoachSync', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),),

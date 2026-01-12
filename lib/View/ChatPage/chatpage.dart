@@ -42,7 +42,10 @@ class ChatPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color(0xFF181818),
       appBar: AppBar(
+        foregroundColor: Colors.white,
         backgroundColor: Colors.transparent,
+        leadingWidth: 30,
+        automaticallyImplyLeading: true,
         title: Row(
           children: [
             CircleAvatar(

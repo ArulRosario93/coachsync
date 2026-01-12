@@ -1,22 +1,22 @@
 import 'dart:convert';
+import 'package:coachsync/View/ChatPage/chatpage.dart';
 import 'package:coachsync/View/ClientPages/COngoingSchedulePage/congingschedulepage.dart';
 import 'package:coachsync/View/ClientPages/WorkoutPage/workoutpage.dart';
 import 'package:coachsync/View/WIdgets/cbottomnavbar.dart';
 import 'package:coachsync/View/WIdgets/ctodaygoal.dart';
 import 'package:coachsync/View/WIdgets/ctomorrowplan.dart';
+import 'package:coachsync/ViewModel/DataLocalStorage.dart';
 import 'package:coachsync/ViewModel/DataStoreMethods.dart';
 import 'package:flutter/material.dart';
 
-class ClientPage extends StatelessWidget {
+class ClientPage extends StatefulWidget {
   const ClientPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  State<ClientPage> createState() => _ClientPageState();
+}
 
-    final height = MediaQuery.sizeOf(context).height;
-    final scroll = height < 700;
-
-    print(height - (230 + 150));
+class _ClientPageState extends State<ClientPage> {
 
     void handkeChange() async {
 
@@ -38,6 +38,35 @@ class ClientPage extends StatelessWidget {
         );
     }
 
+    void handleChatPage() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => ChatPage()),
+      );
+    }
+
+    void handleGetdata() async {
+      var res = await Datalocalstorage().handleGet('12/01');
+
+      print(res);
+    }
+
+    void handleStoreData() async {
+      var res = await Datalocalstorage().handleStore("12/01", 'HOLD UP');
+      
+      print(res);
+    }
+
+  @override
+  void initState() {
+    super.initState();
+
+    handleGetdata();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Color(0xFF181818),
       resizeToAvoidBottomInset: true,
@@ -46,6 +75,12 @@ class ClientPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Color(0xFF181818),
         title: Hero(tag: 'appname', child: Material(color: Colors.transparent, child: Text('CoachSync', style: TextStyle(fontSize: 20, color: Colors.white),))),
+        actions: [
+          IconButton(
+            onPressed: handleChatPage,
+            icon: Icon(Icons.chat_outlined, color: Colors.white,),
+          )
+        ],
       ),
 
       body: SingleChildScrollView(
