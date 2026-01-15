@@ -3,6 +3,7 @@ import 'package:coachsync/View/ChatPage/chatpage.dart';
 import 'package:coachsync/View/ClientPages/COngoingSchedulePage/congingschedulepage.dart';
 import 'package:coachsync/View/ClientPages/WorkoutPage/workoutpage.dart';
 import 'package:coachsync/View/WIdgets/cbottomnavbar.dart';
+import 'package:coachsync/View/WIdgets/cscheduledialog.dart';
 import 'package:coachsync/View/WIdgets/ctodaygoal.dart';
 import 'package:coachsync/View/WIdgets/ctomorrowplan.dart';
 import 'package:coachsync/ViewModel/DataLocalStorage.dart';
@@ -17,6 +18,8 @@ class ClientPage extends StatefulWidget {
 }
 
 class _ClientPageState extends State<ClientPage> {
+
+  static const dates = ['01/01/26', '02/01/26', '03/01/26'];
 
     void handkeChange() async {
 
@@ -57,6 +60,16 @@ class _ClientPageState extends State<ClientPage> {
       print(res);
     }
 
+    void handleClickDate(int date, String day) {
+
+      // Get info from datastore based on date clicked
+
+      showDialog(
+        context: context, builder: (context) => Cscheduledialog(date: date, day: day)
+      );
+    
+    }
+
   @override
   void initState() {
     super.initState();
@@ -87,20 +100,12 @@ class _ClientPageState extends State<ClientPage> {
         physics: BouncingScrollPhysics(),
         child: Column(
           children: [
-            COngingSchedulePage(onTap: handleClick,),
+            COngingSchedulePage(onTap: handleClick, onClick: handleClickDate,),
             CTodaysGoal(),
             CTomorrowPlan()
           ],
         ),
       )
-      // : Column(
-      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //     children: [
-      //       COngingSchedulePage(onTap: handleClick,),
-      //       CTodaysGoal(),
-      //       CTomorrowPlan(),
-      //     ],
-      //   )
     );
   }
 }

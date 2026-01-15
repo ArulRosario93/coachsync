@@ -13,6 +13,5 @@ class Datastoremethods {
       Uri.parse('https://astonishing-lily-1c8ccc.netlify.app/.netlify/functions/modifyuser'),
     );
     return response;
-  }
-  
+  } 
 }

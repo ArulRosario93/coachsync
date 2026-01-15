@@ -35,7 +35,6 @@ class CTodaysGoal extends StatelessWidget {
       },
     ];
 
-
     return Column(
       children: [
 

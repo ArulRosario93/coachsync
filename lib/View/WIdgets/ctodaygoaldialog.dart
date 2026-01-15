@@ -97,10 +97,13 @@ void handleBottomSheet(context){
                     }
                   ),
                 ),
+                
               ],
             ),
 
+            Text('Click on List to fill up the goal', style: TextStyle(color: Colors.white),),
 
+            const SizedBox(height: 20,),
           ],
         ),
     ),

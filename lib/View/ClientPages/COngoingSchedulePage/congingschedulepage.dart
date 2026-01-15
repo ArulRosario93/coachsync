@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 class COngingSchedulePage extends StatelessWidget {
 
   final GestureTapCallback? onTap;
-  const COngingSchedulePage({super.key, required this.onTap});
+  final Function(int date, String day) onClick;
+
+  const COngingSchedulePage({super.key, required this.onTap, required this.onClick});
 
   @override
   Widget build(BuildContext context) {
@@ -47,16 +49,16 @@ class COngingSchedulePage extends StatelessWidget {
         children: [
 
             SizedBox(
-              height: 230,
+              height: 240,
               child: Stack(
                 children: [
-              
+
                   GestureDetector(
                     onTap: onTap,
                     child: Container(
                       color: Colors.amber,
                       height: 150,
-                      margin: EdgeInsets.only(top: 50),
+                      margin: EdgeInsets.only(top: 60),
                       child: Stack(
                         fit: StackFit.expand,
                         alignment: Alignment.bottomCenter,
@@ -83,31 +85,34 @@ class COngingSchedulePage extends StatelessWidget {
                   ),
 
                   SizedBox(
-                    height: 50,
+                    height: 60,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: List.generate(
                         dates.length, (i) => Flexible(
                           flex: 1,
-                          child: Center(
-                            child: Stack(
-                              children: [
-                                
-                                dates[i]['day'] == 'Monday'? RotationTransition(
-                                  turns: AlwaysStoppedAnimation(45 / 360),
-                                  child: Container( width: 60, height: 60, color: Color(0xFF181818),),
-                                ): const SizedBox(),
-
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    FittedBox(child: Text(dates[i]['day'] == 'Monday' ? dates[i]['day']: '', style: TextStyle(color: Colors.white),)),
-                                    Text(dates[i]['date'].toString(), style: TextStyle(color: Colors.white),),
-                                  ],
-                                ),
-
-                              ],
+                          child: GestureDetector(
+                            onTap: () => onClick(dates[i]['date'], dates[i]['day']),
+                            child: Center(
+                              child: Stack(
+                                children: [
+                                  
+                                  dates[i]['day'] == 'Monday'? RotationTransition(
+                                    turns: AlwaysStoppedAnimation(45 / 360),
+                                    child: Container( width: 60, height: 60, color: Color(0xFF181818),),
+                                  ): const SizedBox(),
+                            
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      FittedBox(child: Text(dates[i]['day'] == 'Monday' ? dates[i]['day']: '', style: TextStyle(color: Colors.white),)),
+                                      Text(dates[i]['date'].toString(), style: TextStyle(color: Colors.white),),
+                                    ],
+                                  ),
+                            
+                                ],
+                              ),
                             ),
                           ),
                         )
