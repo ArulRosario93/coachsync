@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:coachsync/Models/everydayform.dart';
 import 'package:coachsync/View/ChatPage/chatpage.dart';
 import 'package:coachsync/View/ClientPages/COngoingSchedulePage/congingschedulepage.dart';
 import 'package:coachsync/View/ClientPages/WorkoutPage/workoutpage.dart';
@@ -48,33 +49,37 @@ class _ClientPageState extends State<ClientPage> {
       );
     }
 
+    void handleDeleteData() async {
+      await Datalocalstorage().handleDeleteAll();
+    }
+
     void handleGetdata() async {
-      var res = await Datalocalstorage().handleGet('12/01');
+
+      var res = await Datalocalstorage().handleKeyCount();
 
       print(res);
     }
 
     void handleStoreData() async {
-      var res = await Datalocalstorage().handleStore("12/01", 'HOLD UP');
-      
+      // EverydayForm form = EverydayForm(id: id, date: date, name: name, description: description, pictureUrl: pictureUrl, exercises: exercises, note: note, goals: goals, planName: planName)
+      var res = await Datalocalstorage().handleStore('2026/01/03', {'date': 'Wednesday'});
+
       print(res);
     }
 
-    void handleClickDate(int date, String day) {
+    void handleClickDate(DateTime date, String day) {
 
       // Get info from datastore based on date clicked
 
       showDialog(
         context: context, builder: (context) => Cscheduledialog(date: date, day: day)
       );
-    
+
     }
 
   @override
   void initState() {
     super.initState();
-
-    handleGetdata();
   }
 
   @override
@@ -90,7 +95,7 @@ class _ClientPageState extends State<ClientPage> {
         title: Hero(tag: 'appname', child: Material(color: Colors.transparent, child: Text('CoachSync', style: TextStyle(fontSize: 20, color: Colors.white),))),
         actions: [
           IconButton(
-            onPressed: handleChatPage,
+            onPressed: handleGetdata,
             icon: Icon(Icons.chat_outlined, color: Colors.white,),
           )
         ],

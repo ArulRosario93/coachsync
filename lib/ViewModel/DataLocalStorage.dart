@@ -4,13 +4,14 @@ class Datalocalstorage {
   
   var box = Hive.box('myBox');
 
-  Future<String> handleStore(String name, dynamic value) async {
+  Future handleKeyCount() async {
 
-    String res = '';
+    var res;
 
     try {
-        await box.put(name, value);
-        res = 'Done';
+      
+      res = box.get('count');
+
     } catch (e) {
         res = 'Error $e';
     }
@@ -19,19 +20,73 @@ class Datalocalstorage {
 
   }
 
-  Future handleGet(String name) async {
+  void handleIncrementkeyCount(int counts) async {
+      
+      int count = box.get('count') ?? 0;
 
-    var res = '';
+      count = count + counts;
+
+      await box.put('count', count);
+
+      print(count);
+
+  }
+
+  Future<String> handleStore(String date, dynamic value) async {
+
+    String res = '';
 
     try {
-      
-     res = await box.get(name);
+
+        await box.put(date, value);
+        res = 'SUCCESS';
 
     } catch (e) {
-      res = 'Error';
+        res = 'Error $e';
     }
 
     return res;
 
+  }
+
+  Future<String> handleEdit() async {
+    String res = '';
+
+    try {
+      
+      var data = await box.get('2025/01/01');
+
+      // EDIT DATA
+
+
+      await box.put('2025/01/01', data);
+
+    } catch (e) {
+      
+
+    }
+
+    return res;
+  }
+
+
+  Future handleGet(String date) async {
+
+    var res;
+
+    try {
+
+       res = await box.get(date);
+
+    } catch (e) {
+      res = 'Error $e';
+    }
+
+    return res;
+
+  }
+
+  Future handleDeleteAll(){
+    return box.clear();
   }
 }

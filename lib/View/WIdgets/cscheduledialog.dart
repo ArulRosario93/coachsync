@@ -1,7 +1,8 @@
+import 'package:coachsync/ViewModel/DataLocalStorage.dart';
 import 'package:flutter/material.dart';
 
 class Cscheduledialog extends StatefulWidget {
-  final int date;
+  final DateTime date;
   final String day;
   const Cscheduledialog({super.key, required this.date, required this.day});
 
@@ -11,119 +12,108 @@ class Cscheduledialog extends StatefulWidget {
 
 class _CscheduledialogState extends State<Cscheduledialog> {
 
-  final PageController _pageController = PageController();
+  late PageController? _pageController;
+  late DateTime currentDate;
+  late dynamic data;
 
-  late List<Widget> pages = [
+  bool _loading = true;
 
-    Dialog(
-      backgroundColor: const Color.fromARGB(255, 228, 228, 228),
-      alignment: Alignment.topCenter,
-      child: Container(
-        alignment: Alignment.center,
-        height: 65,
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Column(
-              children: [
-                Text(widget.day.toString(), style: TextStyle(color: Colors.black),),
-                Text(widget.date.toString(), style: TextStyle(fontSize: 16, color: Colors.black),)
-              ],
-            ),
+  @override
+  void initState() {
+    super.initState();
+    handleLoadData();
+  }
 
-            Column(
-              children: [
-                Text("Workout Plan", style: TextStyle(color: Colors.black),),
-                Text("Push Day", style: TextStyle(fontSize: 16, color: Colors.black),),
-                
-              ],
-            )
-          ],
-        ),
-      )
-    ),
+  void handleLoadData() async {
 
-    Dialog(
-      backgroundColor: const Color.fromARGB(255, 228, 228, 228),
-      alignment: Alignment.topCenter,
-      child: Container(
-        alignment: Alignment.center,
-        height: 65,
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Column(
-              children: [
-                Text(widget.day.toString(), style: TextStyle(color: Colors.black),),
-                Text(widget.date.toString(), style: TextStyle(fontSize: 16, color: Colors.black),)
-              ],
-            ),
+    // final count = await Datalocalstorage().handleKeyCount() - 1;
+    // final data = await Datalocalstorage().handleGet(count);
 
-            Column(
-              children: [
-                Text("Workout Plan", style: TextStyle(color: Colors.black),),
-                Text("Push Day", style: TextStyle(fontSize: 16, color: Colors.black),),
-                
-              ],
-            )
-          ],
-        ),
-      )
-    ),
-  ];
+    setState(() {
+      currentDate = widget.date;
+      _pageController = PageController(
+        // Set Default Page to Total Days
+        initialPage: 1000
+      );
+    });
+
+    await Future.delayed(Duration(seconds: 2));
+    setState(() {
+      // Update loading state
+      _loading = false;
+    });
+  }
+
+  void handleChangePage(int index) async {
+
+    await Future.delayed(Duration(seconds: 2));
+
+  }
 
   @override
   Widget build(BuildContext context) {
-    return PageView.builder(
-      controller: _pageController,
-      itemCount: pages.length,
-      onPageChanged: (index) {
-        // user viewed this page
-        print("Viewing page $index");
+    return Stack(
+      children: [
 
-        // Example: add new page when last page is viewed
-        if (index == pages.length - 1) {
-          setState(() {
-            pages.insert(index, Dialog(
-              backgroundColor: const Color.fromARGB(255, 228, 228, 228),
-              alignment: Alignment.topCenter,
-              child: Container(
-                alignment: Alignment.center,
-                height: 65,
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Column(
-                      children: [
-                        Text(widget.day.toString(), style: TextStyle(color: Colors.black),),
-                        Text(widget.date.toString(), style: TextStyle(fontSize: 16, color: Colors.black),)
-                      ],
+        Container(
+          height: 120,
+          color: Colors.red,
+          child: PageView.builder(
+            physics: PageScrollPhysics(),
+            controller: _pageController,
+            onPageChanged: (index) {
+              handleChangePage(index);
+            },
+            itemBuilder: (context, index) {
+
+              if(_loading){
+                return Dialog(
+                  backgroundColor: const Color.fromARGB(255, 228, 228, 228),
+                  alignment: Alignment.topCenter,
+                  child: Container(
+                    alignment: Alignment.center,
+                    height: 65,
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    child: CircularProgressIndicator(
+                      color: Colors.blue,
                     ),
-
-                    Column(
-                      children: [
-                        Text("Workout Plan", style: TextStyle(color: Colors.black),),
-                        Text("Push Day", style: TextStyle(fontSize: 16, color: Colors.black),),
-                        
-                      ],
-                    )
-                  ],
-                ),
-              )
-            ),
-          );
-          });
-        }
-      },
-      itemBuilder: (context, index) {
-        return pages[index];
-      },
+                  )
+                );
+              }
+          
+              return Dialog(
+                backgroundColor: const Color.fromARGB(255, 228, 228, 228),
+                alignment: Alignment.topCenter,
+                child: Container(
+                  alignment: Alignment.center,
+                  height: 65,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Column(
+                        children: [
+                          Text(widget.day, style: TextStyle(color: Colors.black),),
+                          Text(widget.date.day.toString(), style: TextStyle(fontSize: 16, color: Colors.black),)
+                        ],
+                      ),
+          
+                      Column(
+                        children: [
+                          Text("Workout Plan", style: TextStyle(color: Colors.black),),
+                          Text("Push Day", style: TextStyle(fontSize: 16, color: Colors.black),),
+                          
+                        ],
+                      )
+                    ],
+                  ),
+                )
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }
