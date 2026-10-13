@@ -60,43 +60,30 @@ class CTodaysGoal extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 20),
             child: Stack(
               alignment: Alignment.center,
-              children: [
-                Stack(
-                  alignment: Alignment.center,
-                  children:
-                    List.generate(
-                        goals.length, (index) {
-
-                          final double maxSize = 220.0; // outermost circle size
-                          final double ringGap = 18.0;  // space between each ring
-
-                          final double size = maxSize - (index * ringGap * 2.5);
-                
-                          return SizedBox(
-                            height: size,
-                            width: size,
-                            child: CircularProgressIndicator.adaptive(
-                              value: goals[index]['value'],
-                              strokeWidth: 10.0,
-                              backgroundColor: Colors.blueGrey,
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                goals[index]['color'],
-                              ),
-                            ),
-                          );
-                        },
-                    ),
-                  ),
-
-                  Container(
-                    alignment: Alignment.bottomRight,
-                    child: IconButton(
-                      onPressed: handleChatNavigation,
-                      icon: Icon(Icons.arrow_forward_ios_rounded, color: Colors.white,),
-                    ),
-                  )
-              ]
-          ),
+              children:
+                List.generate(
+                    goals.length, (index) {
+            
+                      final double maxSize = 220.0; // outermost circle size
+                      final double ringGap = 18.0;  // space between each ring
+            
+                      final double size = maxSize - (index * ringGap * 2.5);
+            
+                      return SizedBox(
+                        height: size,
+                        width: size,
+                        child: CircularProgressIndicator.adaptive(
+                          value: goals[index]['value'],
+                          strokeWidth: 10.0,
+                          backgroundColor: Colors.blueGrey,
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            goals[index]['color'],
+                          ),
+                        ),
+                      );
+                    },
+                ),
+              ),
         )),
     
         // Padding(

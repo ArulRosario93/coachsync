@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:coachsync/View/ChatPage/chatpage.dart';
 import 'package:coachsync/View/ClientPages/COngoingSchedulePage/congingschedulepage.dart';
+import 'package:coachsync/View/ClientPages/COngoingSchedulePage/testing.dart';
 import 'package:coachsync/View/ClientPages/WorkoutPage/workoutpage.dart';
 import 'package:coachsync/View/WIdgets/cbottomnavbar.dart';
 import 'package:coachsync/View/WIdgets/cscheduledialog.dart';
@@ -96,7 +97,8 @@ class _ClientPageState extends State<ClientPage> {
 
       body: Column(
         children: [
-          COngingSchedulePage(onTap: handleClick, onClick: handleClickDate,),
+          // COngingSchedulePage(onTap: handleClick, onClick: handleClickDate,),
+          Testing(),
           CTodaysGoal(),
           CTomorrowPlan()
         ],

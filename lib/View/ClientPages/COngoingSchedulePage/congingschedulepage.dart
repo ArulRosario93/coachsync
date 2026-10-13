@@ -89,7 +89,7 @@ class COngingSchedulePage extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: List.generate(
-                        dates.length, 
+                        dates.length,
                         (i) => Flexible(
                           flex: 1,
                           child: GestureDetector(
@@ -123,7 +123,6 @@ class COngingSchedulePage extends StatelessWidget {
                 ],
               ),
             )
-      
         ],
       ),
     );
