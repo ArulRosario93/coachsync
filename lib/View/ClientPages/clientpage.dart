@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:coachsync/Models/everydayform.dart';
 import 'package:coachsync/View/ChatPage/chatpage.dart';
 import 'package:coachsync/View/ClientPages/COngoingSchedulePage/congingschedulepage.dart';
 import 'package:coachsync/View/ClientPages/WorkoutPage/workoutpage.dart';
@@ -93,23 +92,14 @@ class _ClientPageState extends State<ClientPage> {
       appBar: AppBar(
         backgroundColor: Color(0xFF181818),
         title: Hero(tag: 'appname', child: Material(color: Colors.transparent, child: Text('CoachSync', style: TextStyle(fontSize: 20, color: Colors.white),))),
-        actions: [
-          IconButton(
-            onPressed: handleGetdata,
-            icon: Icon(Icons.chat_outlined, color: Colors.white,),
-          )
-        ],
       ),
 
-      body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            COngingSchedulePage(onTap: handleClick, onClick: handleClickDate,),
-            CTodaysGoal(),
-            CTomorrowPlan()
-          ],
-        ),
+      body: Column(
+        children: [
+          COngingSchedulePage(onTap: handleClick, onClick: handleClickDate,),
+          CTodaysGoal(),
+          CTomorrowPlan()
+        ],
       )
     );
   }

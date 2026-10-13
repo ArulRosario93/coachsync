@@ -1,44 +1,70 @@
 import 'package:flutter/material.dart';
 
-class ChatPage extends StatelessWidget {
+class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
 
   @override
+  State<ChatPage> createState() => _ChatPageState();
+}
+
+class _ChatPageState extends State<ChatPage> {
+  final TextEditingController messageController = TextEditingController();
+
+  List msgs = [
+    {
+      'uid': '',
+      'type': 'header',
+      'message': 'Hello, how can I assist you today?',
+      'timestamp': DateTime.now().subtract(Duration(minutes: 5)),
+    },
+    {
+      'uid': 'user123',
+      'type': 'text',
+      'message': 'I would like to know more about your training programs.',
+      'timestamp': DateTime.now().subtract(Duration(minutes: 4)),
+    },
+    {
+      'uid': '',
+      'type': 'text',
+      'message': 'Sure! We offer a variety of training programs tailored to your needs.',
+      'timestamp': DateTime.now().subtract(Duration(minutes: 3)),
+    },
+    {
+      'uid': 'user123',
+      'type': 'text',
+      'message': 'That sounds great! Can you provide more details?',
+      'timestamp': DateTime.now().subtract(Duration(minutes: 2)),
+    },
+    {
+      'uid': '',
+      'type': 'text',
+      'message': 'Absolutely! Our programs include strength training, cardio, and flexibility exercises.',
+      'timestamp': DateTime.now().subtract(Duration(minutes: 1)),
+    },
+  ];
+
+  void handleSendMessage(){
+    if (messageController.text.isNotEmpty) {
+      msgs.add({
+        'uid': '',
+        'type': 'text',
+        'message': messageController.text,
+        'timestamp': DateTime.now(),
+      });
+
+      messageController.clear();
+
+      setState(() {
+        // Update the UI 
+      });
+    }
+
+
+    print(msgs);
+  }
+
+  @override
   Widget build(BuildContext context) {
-
-    List msgs = [
-      {
-        'uid': '',
-        'type': 'header',
-        'message': 'Hello, how can I assist you today?',
-        'timestamp': DateTime.now().subtract(Duration(minutes: 5)),
-      },
-      {
-        'uid': 'user123',
-        'type': 'text',
-        'message': 'I would like to know more about your training programs.',
-        'timestamp': DateTime.now().subtract(Duration(minutes: 4)),
-      },
-      {
-        'uid': '',
-        'type': 'text',
-        'message': 'Sure! We offer a variety of training programs tailored to your needs.',
-        'timestamp': DateTime.now().subtract(Duration(minutes: 3)),
-      },
-      {
-        'uid': 'user123',
-        'type': 'text',
-        'message': 'That sounds great! Can you provide more details?',
-        'timestamp': DateTime.now().subtract(Duration(minutes: 2)),
-      },
-      {
-        'uid': '',
-        'type': 'text',
-        'message': 'Absolutely! Our programs include strength training, cardio, and flexibility exercises.',
-        'timestamp': DateTime.now().subtract(Duration(minutes: 1)),
-      },
-    ];
-
     return Scaffold(
       backgroundColor: Color(0xFF181818),
       appBar: AppBar(
@@ -150,6 +176,7 @@ class ChatPage extends StatelessWidget {
               children: [
                 Expanded(
                   child: TextField(
+                    controller: messageController,
                     style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.only(left: 10),
@@ -161,10 +188,7 @@ class ChatPage extends StatelessWidget {
                 ),
                 IconButton(
                   icon: Icon(Icons.send, color: Colors.white,),
-                  onPressed: () {
-                    // Handle send action
-                    print('send message');
-                  },
+                  onPressed: handleSendMessage,
                 ),
               ],
             ),

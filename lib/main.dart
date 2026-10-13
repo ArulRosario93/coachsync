@@ -1,14 +1,8 @@
-import 'package:coachsync/View/ChatPage/chatpage.dart';
-import 'package:coachsync/View/ClientPages/SuggestedTrainerPage/suggestedtrainerpage.dart';
-import 'package:coachsync/View/ClientPages/WorkoutPage/workoutpage.dart';
 import 'package:coachsync/View/ClientPages/clientpage.dart';
-import 'package:coachsync/View/OnboardingPages/onboardingpage.dart';  
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:firebase_core/firebase_core.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'firebase_options.dart';
 
 void main() async {
 

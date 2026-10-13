@@ -1,5 +1,4 @@
 
-import 'package:coachsync/View/WIdgets/inputfield.dart';
 import 'package:flutter/material.dart';
 
 class CSearchTrainerPage extends StatelessWidget {

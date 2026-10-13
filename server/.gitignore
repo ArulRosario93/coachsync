@@ -1,3 +1,5 @@
 node_modules/
 development.env
 coachsync-e5cb1-firebase-adminsdk-fbsvc-8f9b56e3fa.json
+# Local Netlify folder
+.netlify

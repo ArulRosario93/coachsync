@@ -59,7 +59,7 @@ class Authmethods {
 
       try {
 
-        final gSign = await GoogleSignIn.instance;
+        final gSign = GoogleSignIn.instance;
 
         gSign.initialize(
           serverClientId: '845932429937-n003e89mg701qut4c3oglgli2rsmg2d1.apps.googleusercontent.com',
