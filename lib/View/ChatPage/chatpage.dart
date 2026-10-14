@@ -59,7 +59,6 @@ class _ChatPageState extends State<ChatPage> {
       });
     }
 
-
     print(msgs);
   }
 

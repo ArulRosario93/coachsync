@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:coachsync/View/ClientPages/clientpage.dart';
 
 class ClientBottomNavBar extends StatelessWidget {
-  const ClientBottomNavBar({super.key});
+  final Function(int) handlePageChange;
+  const ClientBottomNavBar({super.key, required this.handlePageChange});
 
   @override
   Widget build(BuildContext context) {
@@ -16,23 +17,23 @@ class ClientBottomNavBar extends StatelessWidget {
       switch (index) {
         case 0:
           // Navigate to Home
-          Navigator.push(context, MaterialPageRoute(builder: (context) => ClientPage()));
+          handlePageChange(0);
           break;
         case 1:
           // Navigate to Search
-          Navigator.push(context, MaterialPageRoute(builder: (context) => SearchPage()));
+          handlePageChange(1);
           break;
         case 2:
           // Navigate to Chat
-          Navigator.push(context, MaterialPageRoute(builder: (context) => ChatPage()));
+          handlePageChange(2);
           break;
         case 3:
           // Navigate to Create
-          Navigator.push(context, MaterialPageRoute(builder: (context) => CreatePage()));
+          handlePageChange(3);
           break;
         case 4:
           // Navigate to Profile
-          Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilePage()));
+          handlePageChange(4);
           break;
       }
     }

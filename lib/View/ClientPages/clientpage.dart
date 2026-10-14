@@ -2,7 +2,11 @@ import 'dart:convert';
 import 'package:coachsync/View/ChatPage/chatpage.dart';
 import 'package:coachsync/View/ClientPages/COngoingSchedulePage/congingschedulepage.dart';
 import 'package:coachsync/View/ClientPages/COngoingSchedulePage/testing.dart';
+import 'package:coachsync/View/ClientPages/HomePage/homepage.dart';
 import 'package:coachsync/View/ClientPages/WorkoutPage/workoutpage.dart';
+import 'package:coachsync/View/CreatePage/createpage.dart';
+import 'package:coachsync/View/ProfilePage/profilepage.dart';
+import 'package:coachsync/View/SearchPage/SearchPage.dart';
 import 'package:coachsync/View/WIdgets/cbottomnavbar.dart';
 import 'package:coachsync/View/WIdgets/cscheduledialog.dart';
 import 'package:coachsync/View/WIdgets/ctodaygoal.dart';
@@ -20,7 +24,14 @@ class ClientPage extends StatefulWidget {
 
 class _ClientPageState extends State<ClientPage> {
 
-  static const dates = ['01/01/26', '02/01/26', '03/01/26'];
+
+    final PageController controller = PageController();
+
+    void handlePageChanged(int val) {
+      controller.jumpToPage(val);
+
+      print(val);
+    }
 
     void handkeChange() async {
 
@@ -88,19 +99,21 @@ class _ClientPageState extends State<ClientPage> {
     return Scaffold(
       backgroundColor: Color(0xFF181818),
       resizeToAvoidBottomInset: true,
-      bottomNavigationBar: 
-      ClientBottomNavBar(),
+      bottomNavigationBar: ClientBottomNavBar(handlePageChange: handlePageChanged,),
+
       appBar: AppBar(
         backgroundColor: Color(0xFF181818),
         title: Hero(tag: 'appname', child: Material(color: Colors.transparent, child: Text('CoachSync', style: TextStyle(fontSize: 20, color: Colors.white),))),
       ),
 
-      body: Column(
+      body: PageView(
+        controller: controller,
         children: [
-          // COngingSchedulePage(onTap: handleClick, onClick: handleClickDate,),
-          Testing(),
-          CTodaysGoal(),
-          CTomorrowPlan()
+            HomePage(),
+            SearchPage(),
+            ChatPage(),
+            CreatePage(),
+            ProfilePage(),
         ],
       )
     );

@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 
 class Testing2 extends StatelessWidget {
-  final List<DateTime> datetime;
+  final List schedule;
   final int val;
-  const Testing2({super.key, required this.datetime, required this.val});
+  const Testing2({super.key, required this.schedule, required this.val});
 
   @override
   Widget build(BuildContext context) {
 
-    final prevprevDate = val >= 2 ? datetime[val - 2].day : " ";
-    final prevDate = val >= 1 ? datetime[val - 1].day : " ";
-    final date = datetime[val].day;
-    final nextDate = val + 1 < datetime.length
-        ? datetime[val + 1].day
+    final prevprevDate = val >= 2 ? schedule[val - 2]['date'].day : " ";
+    final prevDate = val >= 1 ? schedule[val - 1]['date'].day : " ";
+    final date = schedule[val]['date'].day;
+    final nextDate = val + 1 < schedule.length
+        ? schedule[val + 1]['date'].day
         : " ";
-    final nextnextDate = val + 2 < datetime.length
-        ? datetime[val + 2].day
+    final nextnextDate = val + 2 < schedule.length
+        ? schedule[val + 2]['date'].day
         : " ";
 
     return Row(
